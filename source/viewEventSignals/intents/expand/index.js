@@ -4,10 +4,11 @@ import mergeDeepRight from "@unction/mergedeepright"
 import recordFromEntity from "@unction/recordfromentity"
 import mapValues from "@unction/mapvalues"
 
-import type {SignalType} from "types"
+import type {DataTreeType} from "types"
 import type {ObjectTreeType} from "types"
+import type {NamedNodeMapType} from "types"
 
-export default function asSignal (attributes: NamedNodeMap): SignalType {
+export default function expand (attributes: NamedNodeMapType): DataTreeType {
   return reduceValues(
     (accumulated: ObjectTreeType | {[name: string]: string}): Function =>
       (value: mixed): ObjectTreeType => {

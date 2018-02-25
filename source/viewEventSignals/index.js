@@ -1,26 +1,30 @@
 import mapValues from "@unction/mapvalues"
 import domEventsMany from "@unction/domeventsmany"
-import pipe from "@unction/pipe"
-import keyChain from "@unction/keychain"
+import flatten from "@unction/flatten"
 
-import asSignal from "./asSignal"
+import intents from "./intents"
+import signalize from "./signalize"
 
-import type {Stream} from "types"
+import type {StreamType} from "types"
 import type {SignalType} from "types"
+import type {EventType} from "types"
 
-export default function viewEventSignals (view: Stream<mixed>): Stream<SignalType> {
-  return mapValues(
-    pipe([keyChain(["target", "attributes"]), asSignal])
-  )(
-    domEventsMany(
-      {}
-    )([
-      "click",
-      "hover",
-      "change",
-      "submit",
-    ])(
-      view
+export default function viewEventSignals (view: StreamType<mixed>): StreamType<SignalType> {
+  return flatten(
+    mapValues(
+      (event: EventType): StreamType<SignalType> =>
+        signalize(event)(intents(event))
+    )(
+      domEventsMany(
+        {}
+      )([
+        "click",
+        "hover",
+        "change",
+        "submit",
+      ])(
+        view
+      )
     )
   )
 }

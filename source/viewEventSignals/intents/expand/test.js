@@ -2,7 +2,7 @@
 import {test} from "tap"
 import "dom-test"
 
-import asSignal from "./"
+import expand from "./"
 
 test("Single trigger + Single intent + Parameters", ({same, end}) => {
   const element = document.createElement("input")
@@ -13,7 +13,7 @@ test("Single trigger + Single intent + Parameters", ({same, end}) => {
   element.setAttribute("intents-change-updateformfield-parameters-form", "search")
 
   same(
-    asSignal(element.attributes),
+    expand(element.attributes),
     {
       intents: {
         change: {
@@ -45,7 +45,7 @@ test("Single trigger + Multiple intent + Parameters", ({same, end}) => {
   element.setAttribute("intents-change-requestsearch-parameters-form", "search")
 
   same(
-    asSignal(element.attributes),
+    expand(element.attributes),
     {
       intents: {
         change: {
@@ -85,7 +85,7 @@ test("Multiple triggers + Single intent + Parameters", ({same, end}) => {
   element.setAttribute("intents-hover-updateformfield-parameters-form", "search")
 
   same(
-    asSignal(element.attributes),
+    expand(element.attributes),
     {
       intents: {
         change: {
