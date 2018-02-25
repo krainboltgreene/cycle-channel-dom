@@ -1,6 +1,6 @@
 {
   "name": "cycle-channel-dom",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "A stream mapper that turns dom emits into signals",
   "keywords": [
     "cycle",
